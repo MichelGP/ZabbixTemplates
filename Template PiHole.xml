@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<zabbix_export>
+    <version>5.0</version>
+    <date>2022-05-11T12:03:26Z</date>
+    <groups>
+        <group>
+            <name>Custom Templates</name>
+        </group>
+    </groups>
+    <templates>
+        <template>
+            <template>Template PiHole</template>
+            <name>Template PiHole</name>
+            <groups>
+                <group>
+                    <name>Custom Templates</name>
+                </group>
+            </groups>
+            <applications>
+                <application>
+                    <name>PiHole</name>
+                </application>
+            </applications>
+            <items>
+                <item>
+                    <name>Process memory usage: piholeFTL</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>proc.mem[pihole-FTL]</key>
+                    <delay>5m</delay>
+                    <applications>
+                        <application>
+                            <name>PiHole</name>
+                        </application>
+                    </applications>
+                </item>
+                <item>
+                    <name>Count running processes: lighttpd</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>proc.num[lighttpd]</key>
+                    <applications>
+                        <application>
+                            <name>PiHole</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{last(#1)}=0</expression>
+                            <name>Process not running (lighttpd)</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+                <item>
+                    <name>Count running processes: pihole-FTL</name>
+                    <type>ZABBIX_ACTIVE</type>
+                    <key>proc.num[pihole-FTL]</key>
+                    <applications>
+                        <application>
+                            <name>PiHole</name>
+                        </application>
+                    </applications>
+                    <triggers>
+                        <trigger>
+                            <expression>{last(#1)}=0</expression>
+                            <name>Process not running (pihole-FTL)</name>
+                            <priority>WARNING</priority>
+                        </trigger>
+                    </triggers>
+                </item>
+            </items>
+            <tags>
+                <tag>
+                    <tag>Application</tag>
+                    <value>PiHole</value>
+                </tag>
+            </tags>
+        </template>
+    </templates>
+</zabbix_export>
