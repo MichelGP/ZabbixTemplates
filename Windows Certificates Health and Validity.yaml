@@ -1,0 +1,147 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: 6ab0a79c9df34e7088deaa486ed52b61
+      name: 'Custom Templates'
+  templates:
+    - uuid: 399daa5b814d4936b81371ba16f6ad97
+      template: 'Windows Certificates Health and Validity'
+      name: 'Windows Certificates Health and Validity'
+      description: 'This template discovers and monitors certificates for health and validity.'
+      groups:
+        - name: 'Custom Templates'
+      items:
+        - uuid: 7213b0e224ac4544897b96707ac1bebf
+          name: 'Get Certificates'
+          key: 'system.run[[powershell.exe -c "ConvertTo-JSON (@(Get-ChildItem Cert:\LocalMachine\My -recurse | select thumbprint, subject))"]]'
+          delay: 1h
+          history: 1d
+          trends: '0'
+          value_type: TEXT
+          description: 'Used by the certificate discovery in the Windows Certificates template.'
+          tags:
+            - tag: Application
+              value: Certificates
+        - uuid: 8f6c07fd313c4c4fbdce3bafbba1c66b
+          name: 'Agent Config'
+          type: ZABBIX_ACTIVE
+          key: 'vfs.file.contents["C:\Zabbix Agent\zabbix_agentd.conf"]'
+          delay: 1h
+          history: 1d
+          trends: '0'
+          description: 'Checks the agent configuration. RemoteCommands must be enabled. 1 is OK / 0 is NOK'
+          preprocessing:
+            - type: REGEX
+              parameters:
+                - \nEnableRemoteCommands=(\d+)
+                - \1
+              error_handler: CUSTOM_VALUE
+              error_handler_params: '0'
+          tags:
+            - tag: Application
+              value: Certificates
+          triggers:
+            - uuid: b5e539771e204a74bee9df14854eb2c9
+              expression: 'last(/Windows Certificates Health and Validity/vfs.file.contents["C:\Zabbix Agent\zabbix_agentd.conf"])=0'
+              name: 'Certificate monitoring is incomplete.'
+              priority: INFO
+              description: 'RemoteCommands is not enabled in agent config.'
+      discovery_rules:
+        - uuid: b34399a8b05247578f371c16bb301a05
+          name: 'Certificate Discovery'
+          type: DEPENDENT
+          key: discover.certs
+          delay: '0'
+          filter:
+            evaltype: AND
+            conditions:
+              - macro: '{#SUBJECT}'
+                value: '{$CERT.SUBJECT.MATCHES}'
+                formulaid: A
+              - macro: '{#SUBJECT}'
+                value: '{$CERT.SUBJECT.NOTMATCHES}'
+                operator: NOT_MATCHES_REGEX
+                formulaid: B
+              - macro: '{#THUMBPRINT}'
+                value: '{$CERT.THUMBPRINT.MATCHES}'
+                formulaid: C
+              - macro: '{#THUMBPRINT}'
+                value: '{$CERT.THUMBPRINT.NOTMATCHES}'
+                operator: NOT_MATCHES_REGEX
+                formulaid: D
+          lifetime: '0'
+          item_prototypes:
+            - uuid: 46ef567bd9d143c58147b46bb9595c46
+              name: 'Certificate Validity {#SUBJECT} ({#THUMBPRINT})'
+              key: 'system.run[[powershell.exe -c "Get-ChildItem -path cert: -recurse -Expiringindays 30 | where{$_.Thumbprint -eq ''{#THUMBPRINT}''} | Measure | Select-Object -ExpandProperty Count"]]'
+              delay: 1h
+              history: 7d
+              trends: '0'
+              value_type: FLOAT
+              description: 'Checks if the certificate will expire soon.'
+              tags:
+                - tag: Application
+                  value: Certificates
+            - uuid: 5bc283dbd2864955850bea6542a7505a
+              name: 'Certificate Health {#SUBJECT} ({#THUMBPRINT})'
+              key: 'system.run[[powershell.exe -c "Test-Certificate -Cert Cert:\LocalMachine\My\{#THUMBPRINT} -Erroraction SilentlyContinue"]]'
+              delay: 1h
+              history: 7d
+              trends: '0'
+              value_type: LOG
+              description: 'Checks the health of the certificate (revocation, chain, valid, etc)'
+              tags:
+                - tag: Application
+                  value: Certificates
+              trigger_prototypes:
+                - uuid: 8710497cac054a299f3c117b57d080b9
+                  expression: 'find(/Windows Certificates Health and Validity/system.run[[powershell.exe -c "Test-Certificate -Cert Cert:\LocalMachine\My\{#THUMBPRINT} -Erroraction SilentlyContinue"]],,"regexp","CERT_TRUST_IS_UNTRUSTED_ROOT")=1'
+                  name: 'Certificate has an untrusted root {#SUBJECT}'
+                  opdata: 'Thumbprint of the certificate: {#THUMBPRINT}'
+                  priority: INFO
+                - uuid: 17afc8231e4448a392a0615546638e97
+                  expression: 'find(/Windows Certificates Health and Validity/system.run[[powershell.exe -c "Test-Certificate -Cert Cert:\LocalMachine\My\{#THUMBPRINT} -Erroraction SilentlyContinue"]],,"regexp","CERT_TRUST_IS_PARTIAL_CHAIN")=1'
+                  name: 'Certificate has a partial chain {#SUBJECT}'
+                  opdata: 'Thumbprint of the certificate: {#THUMBPRINT}'
+                  priority: INFO
+                - uuid: e2c8cecbc8f645e7b065b96312277ef4
+                  expression: 'find(/Windows Certificates Health and Validity/system.run[[powershell.exe -c "Test-Certificate -Cert Cert:\LocalMachine\My\{#THUMBPRINT} -Erroraction SilentlyContinue"]],,"regexp","CERT_TRUST_IS_NOT_TIME_VALID")=1'
+                  name: 'Certificate is expired: {#SUBJECT}'
+                  opdata: 'Thumbprint of the certificate: {#THUMBPRINT}'
+                  priority: AVERAGE
+                - uuid: 932c0b9131874e4184a690b6841a7716
+                  expression: 'find(/Windows Certificates Health and Validity/system.run[[powershell.exe -c "Test-Certificate -Cert Cert:\LocalMachine\My\{#THUMBPRINT} -Erroraction SilentlyContinue"]],,"regexp","CERT_TRUST_IS_OFFLINE_REVOCATION")=1'
+                  name: 'Certificate revocation cannot be checked {#SUBJECT}'
+                  opdata: 'Thumbprint of the certificate: {#THUMBPRINT}'
+                  priority: INFO
+                - uuid: 3f5247a4cb7545b09378beabe0ab9581
+                  expression: 'find(/Windows Certificates Health and Validity/system.run[[powershell.exe -c "Test-Certificate -Cert Cert:\LocalMachine\My\{#THUMBPRINT} -Erroraction SilentlyContinue"]],,"regexp","CERT_TRUST_IS_OFFLINE_REVOCATION")=1'
+                  name: 'Certificate revocation issue {#SUBJECT}'
+                  opdata: 'Thumbprint of the certificate: {#THUMBPRINT}'
+                  priority: INFO
+          trigger_prototypes:
+            - uuid: d7893d2ebc8b46caa6a89872fa871382
+              expression: 'last(/Windows Certificates Health and Validity/system.run[[powershell.exe -c "Get-ChildItem -path cert: -recurse -Expiringindays 30 | where{$_.Thumbprint -eq ''{#THUMBPRINT}''} | Measure | Select-Object -ExpandProperty Count"]])>0 and find(/Windows Certificates Health and Validity/system.run[[powershell.exe -c "Test-Certificate -Cert Cert:\LocalMachine\My\{#THUMBPRINT} -Erroraction SilentlyContinue"]],,"iregexp","CERT_TRUST_IS_NOT_TIME_VALID")=0'
+              name: 'Certificate will expire soon: {#SUBJECT}'
+              opdata: 'Thumbprint of the certificate: {#THUMBPRINT}'
+              priority: WARNING
+          master_item:
+            key: 'system.run[[powershell.exe -c "ConvertTo-JSON (@(Get-ChildItem Cert:\LocalMachine\My -recurse | select thumbprint, subject))"]]'
+          lld_macro_paths:
+            - lld_macro: '{#SUBJECT}'
+              path: $.Subject
+            - lld_macro: '{#THUMBPRINT}'
+              path: $.Thumbprint
+      macros:
+        - macro: '{$CERT.SUBJECT.MATCHES}'
+          value: '.*'
+          description: 'This macro is used in Certificate Discovery. It can be overridden on a host or linked template level.'
+        - macro: '{$CERT.SUBJECT.NOTMATCHES}'
+          value: CHANGE_IF_NEEDED
+          description: 'This macro is used in Certificate Discovery. It can be overridden on a host or linked template level.'
+        - macro: '{$CERT.THUMBPRINT.MATCHES}'
+          value: '.*'
+          description: 'This macro is used in Certificate Discovery. It can be overridden on a host or linked template level.'
+        - macro: '{$CERT.THUMBPRINT.NOTMATCHES}'
+          value: CHANGE_IF_NEEDED
+          description: 'This macro is used in Certificate Discovery. It can be overridden on a host or linked template level.'

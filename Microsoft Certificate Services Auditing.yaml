@@ -1,0 +1,231 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: 6ab0a79c9df34e7088deaa486ed52b61
+      name: 'Custom Templates'
+  templates:
+    - uuid: 4d00335cbcf5485098d315a16db84b1f
+      template: 'Microsoft Certificate Services Auditing'
+      name: 'Microsoft Certificate Services Auditing'
+      groups:
+        - name: 'Custom Templates'
+      items:
+        - uuid: 2633165e858d461595005240b8faafdf
+          name: 'Certificate Services - The certificate manager denied a pending certificate request'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4868,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 03756deb774746b792d4c3e8a325b00a
+          name: 'Certificate Services - Certificate Services received a resubmitted certificate request'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4869,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 9431c7c73ef745e98c412a69604f0580
+          name: 'Certificate Services - Certificate Services revoked a certificate'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4870,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: f9b0ba74c84f43aca54ea8bee224eebc
+          name: 'Certificate Services - Certificate Services received a request to publish the certificate revocation list (CRL)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4871,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 0352b83cfa7243139671599ce64f8b36
+          name: 'Certificate Services - Certificate Services published the certificate revocation list (CRL)'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4872,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 1385f5ad97de4eca99738fa3cf5a07b0
+          name: 'Certificate Services - A certificate request extension changed'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4873,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: ac86c0db83a449e7a888f09ba3c38544
+          name: 'Certificate Services - One or more certificate request attributes changed'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4874,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 9b1249424c994aa5b43ec764bcc43ee2
+          name: 'Certificate Services - Certificate Services received a request to shut down'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4875,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: dd938fcc2ede4500b8bb9aa8035ed4c3
+          name: 'Certificate Services - Certificate Services backup completed'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4877,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 72820332f85d4eb6977f2d767edc5252
+          name: 'Certificate Services - Certificate Services restore started'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4878,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: dd25ca58e2234f3791bd8f20e4ca92f7
+          name: 'Certificate Services - Certificate Services restore completed'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4879,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 582599c9d08b48f298c4e0b325a82e8e
+          name: 'Certificate Services - Certificate Services started'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4880,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 8887a3df545442988bd88ab36340ba71
+          name: 'Certificate Services - Certificate Services stopped'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4881,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 006d2c96eca74e349686c8287ed44eec
+          name: 'Certificate Services - The security permissions for Certificate Services changed'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4882,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 9bf243a6ee8b42308c3a7f022c56fbc4
+          name: 'Certificate Services - Certificate Services retrieved an archived key'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4883,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 0cf30894cbf240299a7b944fea6bfd01
+          name: 'Certificate Services - Certificate Services imported a certificate into its database'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4884,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 6b0614d4470847ba81c84706b8e9980f
+          name: 'Certificate Services - The audit filter for Certificate Services changed'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4885,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 777ad6404ba347619f03f7386a8fbbca
+          name: 'Certificate Services - Certificate Services received a certificate request'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4886,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: b52235ef30e3490eae3c4c40091c9e82
+          name: 'Certificate Services - Certificate Services approved a certificate request and issued a certificate'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4887,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 252a6f97d4724b8e874b7215a0b024a6
+          name: 'Certificate Services - Certificate Services denied a certificate request'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4888,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: cb6f103e8b024e1d97ea3d281aadb833
+          name: 'Certificate Services - Certificate Services set the status of a certificate request to pending'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4889,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 57d69bdaf06940b3a915d3a34303b5fa
+          name: 'Certificate Services - The certificate manager settings for Certificate Services changed'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4890,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 0b40a9a4fa754f669a5d74f5e9ea0d57
+          name: 'Certificate Services - A configuration entry changed in Certificate Services'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4891,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 4ae9dcee3b3643d39c343e606f519230
+          name: 'Certificate Services - A property of Certificate Services changed'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4892,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: bee41f8532a14e2f87858bd9315101e6
+          name: 'Certificate Services - Certificate Services archived a key'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4893,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: b9df554c2604455a87d8c955b8287351
+          name: 'Certificate Services - Certificate Services imported and archived a key'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4894,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: b3ee873d45b44c5dbab9ba6445e508f6
+          name: 'Certificate Services - Certificate Services published the CA certificate to Active Directory Domain Services'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4895,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: cd7d12763a5c4af3ab0a310f9a981853
+          name: 'Certificate Services - One or more rows have been deleted from the certificate database'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4896,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: e8a53a88c2c04780ae3eec16b1cc7c2e
+          name: 'Certificate Services - Role separation enabled'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4897,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: 95320284515d4be691eb272dcdf32d63
+          name: 'Certificate Services - Certificate Services loaded a template'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Security,,,,4898,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: ef017e7fd33047d4a9fefade72ab50cc
+          name: 'Certificate Services - Collect SCEP Certificate Information'
+          type: ZABBIX_ACTIVE
+          key: scepCerts
+          trends: '0'
+          value_type: TEXT
+        - uuid: f9073513823f4f0785a1b9b5e7aca695
+          name: 'SCEP Certificates Expire (7 days)'
+          type: DEPENDENT
+          key: scepCertsExpire7Days
+          delay: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.expire7days
+          master_item:
+            key: scepCerts
+        - uuid: 6bb83f0eccde4aa7881f6aa44728449f
+          name: 'SCEP Certificates Expire (30 days)'
+          type: DEPENDENT
+          key: scepCertsExpire30Days
+          delay: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.expire30days
+          master_item:
+            key: scepCerts
+        - uuid: 4070eea1f5f84e4584def02de9f0ca00
+          name: 'SCEP Certificates Issued'
+          type: DEPENDENT
+          key: scepCertsIssued
+          delay: '0'
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.totalissued
+          master_item:
+            key: scepCerts

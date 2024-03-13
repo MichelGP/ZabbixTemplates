@@ -1,0 +1,42 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: 6ab0a79c9df34e7088deaa486ed52b61
+      name: 'Custom Templates'
+  templates:
+    - uuid: f29ac261364045b3ba06a8d710b6975e
+      template: 'Microsoft Intune Certificate Connector'
+      name: 'Microsoft Intune Certificate Connector'
+      groups:
+        - name: 'Custom Templates'
+      items:
+        - uuid: 0e2520e2be5c4aa8bc531b23a3ab0160
+          name: 'Intune Certificate Connector - Revocation Request - Failed'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Microsoft-Intune-CertificateConnectors/Admin,,,,3001,,skip]'
+          trends: '0'
+          value_type: LOG
+          triggers:
+            - uuid: 19d1ec14246d4f3587439a4f1cfcf0ef
+              expression: 'last(/Microsoft Intune Certificate Connector/eventlog[Microsoft-Intune-CertificateConnectors/Admin,,,,3001,,skip])<>0'
+              name: 'Intune Certificate Connector - SCEP Revocation Request Failed'
+              priority: INFO
+              manual_close: 'YES'
+        - uuid: 4d72eda8d05142c2922bf52bd779cfbd
+          name: 'Intune Certificate Connector - Certificate Request - Success'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Microsoft-Intune-CertificateConnectors/Admin,,,,4000,,skip]'
+          trends: '0'
+          value_type: LOG
+        - uuid: df6c6e3f9eea47ddb863ac3c7eabf446
+          name: 'Intune Certificate Connector - Certificate Request - Failed'
+          type: ZABBIX_ACTIVE
+          key: 'eventlog[Microsoft-Intune-CertificateConnectors/Admin,,,,4001,,skip]'
+          trends: '0'
+          value_type: LOG
+          triggers:
+            - uuid: 57f01a3207cd44adb487ba43f1d7d4e6
+              expression: 'last(/Microsoft Intune Certificate Connector/eventlog[Microsoft-Intune-CertificateConnectors/Admin,,,,4001,,skip])<>0'
+              name: 'Intune Certificate Connector - SCEP Certificate Request Failed'
+              priority: INFO
+              manual_close: 'YES'
