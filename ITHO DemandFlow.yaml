@@ -1,0 +1,630 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    - uuid: a21452c8bd734572a464c3317484596b
+      name: 'Custom Templates'
+  templates:
+    - uuid: edef7be7939e492caf9b5971d6947f50
+      template: 'ITHO DemandFlow'
+      name: 'ITHO DemandFlow'
+      groups:
+        - name: 'Custom Templates'
+      items:
+        - uuid: 2066cde43f8043d1a3a350d98e7d9abd
+          name: getKafka
+          key: getKafka
+          history: '0'
+          trends: '0'
+          value_type: TEXT
+        - uuid: da00f24ee4234801bb7d4bc2e3a6213e
+          name: 'ITHO DemandFlow - 3_6_9 hours DemandFlow timer (sec)'
+          type: DEPENDENT
+          key: ithodemandflow.369hours.demandflow.timer
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''3_6_9 hours DemandFlow timer (sec)'']'
+          master_item:
+            key: getKafka
+        - uuid: 983faa6805b249febed4a6f2e05269ab
+          name: 'ITHO DemandFlow - Calculated CO2 bath2 + toilet2 (ppm)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.co2.bath2toilet2
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated CO2 bath2 + toilet2 (ppm)'']'
+          master_item:
+            key: getKafka
+        - uuid: 138e4544175e42439a032f0f0591e58e
+          name: 'ITHO DemandFlow - Calculated CO2 bathroom1 (ppm)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.co2.bathroom1
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated CO2 bathroom1 (ppm)'']'
+          master_item:
+            key: getKafka
+        - uuid: 840873e5e06042c0b391c1d2489460b7
+          name: 'ITHO DemandFlow - Calculated CO2 bedroom 1 (ppm)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.co2.bedroom1
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated CO2 bedroom 1 (ppm)'']'
+          master_item:
+            key: getKafka
+        - uuid: e593619a422446e2b3abe5d1bb240964
+          name: 'ITHO DemandFlow - Calculated CO2 bedroom 2 (ppm)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.co2.bedroom2
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated CO2 bedroom 2 (ppm)'']'
+          master_item:
+            key: getKafka
+        - uuid: 25cc162f4cef45f78aaec8f6a9e901d7
+          name: 'ITHO DemandFlow - Calculated CO2 bedroom 3 (ppm)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.co2.bedroom3
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated CO2 bedroom 3 (ppm)'']'
+          master_item:
+            key: getKafka
+        - uuid: 709cb23cfd4046d59b0f6d406dcd06ba
+          name: 'ITHO DemandFlow - Calculated CO2 bedroom 4 (ppm)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.co2.bedroom4
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated CO2 bedroom 4 (ppm)'']'
+          master_item:
+            key: getKafka
+        - uuid: 1370a2447bb74f0bae6e84ff7b255328
+          name: 'ITHO DemandFlow - Calculated CO2 extractor (ppm)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.co2.extractor
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated CO2 extractor (ppm)'']'
+          master_item:
+            key: getKafka
+        - uuid: 4c6940fd82a1405284cfa9145bc5186d
+          name: 'ITHO DemandFlow - Calculated CO2 kitchen (ppm)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.co2.kitchen
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated CO2 kitchen (ppm)'']'
+          master_item:
+            key: getKafka
+        - uuid: 296e15a800ad4c0090f0730f33f14b73
+          name: 'ITHO DemandFlow - Calculated CO2 living room 1 (ppm)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.co2.livingroom1
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated CO2 living room 1 (ppm)'']'
+          master_item:
+            key: getKafka
+        - uuid: 87ef4e4546d94390b0f6ac82becfc838
+          name: 'ITHO DemandFlow - Calculated CO2 living room 2 (ppm)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.co2.livingroom2
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated CO2 living room 2 (ppm)'']'
+          master_item:
+            key: getKafka
+        - uuid: e43c960b44074b10974e5d6048af8cd3
+          name: 'ITHO DemandFlow - CO2 plenum (ppm)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.co2.plenum
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''CO2 plenum (ppm)'']'
+          master_item:
+            key: getKafka
+        - uuid: 1196df1d6ff0449bb78fe7125f006c09
+          name: 'ITHO DemandFlow - Calculated CO2 toilet1 (ppm)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.co2.toilet1
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated CO2 toilet1 (ppm)'']'
+          master_item:
+            key: getKafka
+        - uuid: db6f49f6342a4e70b21d4339b079e985
+          name: 'ITHO DemandFlow - Calculated CO2 washroom (ppm)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.co2.washroom
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated CO2 washroom (ppm)'']'
+          master_item:
+            key: getKafka
+        - uuid: ab9c854f84cb42cfb72556e53d3cad1f
+          name: 'ITHO DemandFlow - exhaust fan (%)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.flow.exhaustfan
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''exhaust fan (%)'']'
+          master_item:
+            key: getKafka
+        - uuid: 2b54e60db454487da9b40ed612c04214
+          name: 'ITHO DemandFlow - Calculated pos flap bath2+toilet2'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.pos.valve.bath2toilet2
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated pos valve bath2+toilet2'']'
+          master_item:
+            key: getKafka
+        - uuid: bc2903b4ef3e4899965d450975bddeeb
+          name: 'ITHO DemandFlow - Calculated pos flap bathroom 1'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.pos.valve.bathroom1
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated pos flap bathroom1'']'
+          master_item:
+            key: getKafka
+        - uuid: 61d02be6c9a240b1acf5daa6dcbe3837
+          name: 'ITHO DemandFlow - Calculated pos flap bedroom 1'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.pos.valve.bedroom1
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated pos valve bedroom1'']'
+          master_item:
+            key: getKafka
+        - uuid: 4684d18cc11b4ae5ac1c5e08c29c30f3
+          name: 'ITHO DemandFlow - Calculated pos flap bedroom 2'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.pos.valve.bedroom2
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated pos flap bedroom 2'']'
+          master_item:
+            key: getKafka
+        - uuid: 8d2b42f814024b78bbf19ea3679e1fda
+          name: 'ITHO DemandFlow - Calculated pos flap bedroom 3'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.pos.valve.bedroom3
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated pos flap bedroom 3'']'
+          master_item:
+            key: getKafka
+        - uuid: 058423b75406429db23d363bd4c9d5eb
+          name: 'ITHO DemandFlow - Calculated pos flap bedroom 4'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.pos.valve.bedroom4
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated pos damper bedroom 4'']'
+          master_item:
+            key: getKafka
+        - uuid: dd504c10b2314be8a7e6ca0aed202857
+          name: 'ITHO DemandFlow - Calculated pos flap extractor'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.pos.valve.extractor
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated pos valve extractor'']'
+          master_item:
+            key: getKafka
+        - uuid: cd357afcdd29419695404242c5843ad7
+          name: 'ITHO DemandFlow - Calculated pos flap kitchen'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.pos.valve.kitchen
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''calculated pos flap kitchen'']'
+          master_item:
+            key: getKafka
+        - uuid: a5067cb8bd264a9db8744bd8e88eb0d2
+          name: 'ITHO DemandFlow - Calculated pos flap laundry room'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.pos.valve.laundryroom
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated pos flap laundry room'']'
+          master_item:
+            key: getKafka
+        - uuid: 29d111d6997143789dd35493ec00fc56
+          name: 'ITHO DemandFlow - Calculated pos flap living room 1'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.pos.valve.livingroom1
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated pos flap living room 1'']'
+          master_item:
+            key: getKafka
+        - uuid: bee50519d1704f5ba7b17ddf3aa7d5cf
+          name: 'ITHO DemandFlow - Calculated pos flap living room 2'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.pos.valve.livingroom2
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated pos flap living room 2'']'
+          master_item:
+            key: getKafka
+        - uuid: af50ecfd97a2413cb1a053fda7b54e3e
+          name: 'ITHO DemandFlow - Calculated pos flap toilet 1'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.pos.valve.toilet1
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Calculated pos flap toilet 1'']'
+          master_item:
+            key: getKafka
+        - uuid: 3b50002fbddf4726b60d0f7969bb62ac
+          name: 'ITHO DemandFlow - RH bathroom 1 (%)'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.rh.bathroom
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          value_type: FLOAT
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''RH bathroom 1 (%)'']'
+          master_item:
+            key: getKafka
+        - uuid: 34d253258f864b46b7693477c11f2019
+          name: 'ITHO DemandFlow - Status high bathroom'
+          type: DEPENDENT
+          key: ithodemandflow.calculated.statushigh.bathroom
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Status high bathroom'']'
+          master_item:
+            key: getKafka
+        - uuid: 5bc7edce54b34f2dad2ff53a40821e58
+          name: 'ITHO DemandFlow - CO2 measurement room'
+          type: DEPENDENT
+          key: ithodemandflow.co2.measurement.room
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''CO2 measurement room'']'
+          master_item:
+            key: getKafka
+        - uuid: da25cd0c5f8046079694e6bf92bf5173
+          name: 'ITHO DemandFlow - Error'
+          type: DEPENDENT
+          key: ithodemandflow.error
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.Error
+          master_item:
+            key: getKafka
+        - uuid: 27c10afbc1bb44e6b3a3b3e908582763
+          name: 'ITHO DemandFlow - Measuring interval (sec)'
+          type: DEPENDENT
+          key: ithodemandflow.measuring.interval
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Measuring interval (sec)'']'
+          master_item:
+            key: getKafka
+        - uuid: b2f05215444f42a7b487df8d997d2692
+          name: 'ITHO DemandFlow - Operating mode'
+          type: DEPENDENT
+          key: ithodemandflow.operating.mode
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Operating mode'']'
+          master_item:
+            key: getKafka
+        - uuid: 97560862e74a48e9a6f99d8bdd4f027e
+          name: 'ITHO DemandFlow - Operating phase IBS'
+          type: DEPENDENT
+          key: ithodemandflow.operating.phase.ibs
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Operating phase IBS'']'
+          master_item:
+            key: getKafka
+        - uuid: a64be48013f64c029ab36c62cfa32484
+          name: 'ITHO DemandFlow - Operating status'
+          type: DEPENDENT
+          key: ithodemandflow.operating.status
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Operating status'']'
+          master_item:
+            key: getKafka
+        - uuid: c7187c0b786f4b70b768d8bd4839d179
+          name: 'ITHO DemandFlow - Setting'
+          type: DEPENDENT
+          key: ithodemandflow.setting
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - $.Setting
+          master_item:
+            key: getKafka
+        - uuid: f5de376a259c4d5398051f164f7a0060
+          name: 'ITHO DemandFlow - Status eco comfort'
+          type: DEPENDENT
+          key: ithodemandflow.status.eco.comfort
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Status eco comfort'']'
+          master_item:
+            key: getKafka
+        - uuid: ae27e472bbc54af4868840c1ff9835d3
+          name: 'ITHO DemandFlow - Status high extractor hood'
+          type: DEPENDENT
+          key: ithodemandflow.status.high.extractor.hood
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Status high extractor hood'']'
+          master_item:
+            key: getKafka
+        - uuid: 365938fbebcc4fa9be2a4801758870e6
+          name: 'ITHO DemandFlow - Status high extractor hood and bathr'
+          type: DEPENDENT
+          key: ithodemandflow.status.high.extractor.hood.bathroom
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Status high extractor hood and bathr.'']'
+          master_item:
+            key: getKafka
+        - uuid: 65a28d0890f648608fa81ed3ab1d4ffe
+          name: 'ITHO DemandFlow - Status limited ventilation'
+          type: DEPENDENT
+          key: ithodemandflow.status.limited.ventilation
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Status limited ventilation'']'
+          master_item:
+            key: getKafka
+        - uuid: 75da8630acf941c5b840b49d9a01e592
+          name: 'ITHO DemandFlow - Status manual control'
+          type: DEPENDENT
+          key: ithodemandflow.status.manual.control
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Status manual control'']'
+          master_item:
+            key: getKafka
+        - uuid: 97063d9666eb4944a491ed600bc4f30a
+          name: 'ITHO DemandFlow - Status normal'
+          type: DEPENDENT
+          key: ithodemandflow.status.normal
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Status normal'']'
+          master_item:
+            key: getKafka
+        - uuid: d4c7e3f7967349c4a1645d999ca94253
+          name: 'ITHO DemandFlow - Status not at home'
+          type: DEPENDENT
+          key: ithodemandflow.status.not.at.home
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Status not at home'']'
+          master_item:
+            key: getKafka
+        - uuid: 2703c49af2164334805b6b48487b2b0a
+          name: 'ITHO DemandFlow - Status reserved'
+          type: DEPENDENT
+          key: ithodemandflow.status.reserved
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Status reserved'']'
+          master_item:
+            key: getKafka
+        - uuid: 09799f34378e4aeab3575cf70303d063
+          name: 'ITHO DemandFlow - Status timer'
+          type: DEPENDENT
+          key: ithodemandflow.status.timer
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Status timer'']'
+          master_item:
+            key: getKafka
+        - uuid: 3a3ff9be5aa841aaab787d6f781b24d9
+          name: 'ITHO DemandFlow - Time increment bathroom 2 (sec)'
+          type: DEPENDENT
+          key: ithodemandflow.time.increment.bathroom2
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Time increment bathroom 2 (sec)'']'
+          master_item:
+            key: getKafka
+        - uuid: 3a0245f3b421499e9a197cf9b561eb98
+          name: 'ITHO DemandFlow - Timer extractor (sec)'
+          type: DEPENDENT
+          key: ithodemandflow.timer.extractor
+          delay: '0'
+          history: 365d
+          trends: 3650d
+          preprocessing:
+            - type: JSONPATH
+              parameters:
+                - '$.[''Timer extractor (sec)'']'
+          master_item:
+            key: getKafka
